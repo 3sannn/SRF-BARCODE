@@ -1,5 +1,9 @@
 Flask
 PyMuPDF
+<<<<<<< HEAD
 Flask
 PyMuPDF
 python-barcode
+=======
+python-barcode 
+>>>>>>> ef5c290c6b6b117bdb1dd1ed73e44987647c8018
