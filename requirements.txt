@@ -1,4 +1,4 @@
 Flask
 PyMuPDf
-python-barcode 
-
+python-barcode
+pillow
