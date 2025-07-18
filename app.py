@@ -3,7 +3,6 @@ import fitz  # PyMuPDF
 import barcode as bc
 from barcode.writer import ImageWriter
 import os, json
-import pillow
 import re
 
 app = Flask(__name__)
