@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, session, redirect, url_for
 import fitz  # PyMuPDF
-import barcode
+import barcode as bc
 from barcode.writer import ImageWriter
 import os, json
 import re
@@ -106,7 +106,7 @@ def generate_barcode():
     os.makedirs(os.path.dirname(barcode_path), exist_ok=True)
 
     # Generate barcode with no text printed under it
-    code = barcode.get('code128', barcode_content, writer=ImageWriter())
+    code = bc.get('code128', barcode_content, writer=ImageWriter())
     code.save(barcode_path[:-4], options={
         "background": "white",
         "module_width": 0.2,
