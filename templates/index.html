@@ -9,32 +9,27 @@
 <body>
   <div class="container">
     <h2>SRF Barcode Engine</h2>
-    <button onclick="connectServer()" class="center-btn" style="margin-bottom:1rem;">Connect</button>
+
+    <button onclick="connectServer()" class="center-btn">Connect to Server</button>
     <p id="server-status" class="info"></p>
-    <form method="POST" action="/add_entry">
-      <input name="user_id" placeholder="User ID" required>
-      <input name="shift" placeholder="Shift" required>
-      <input name="timestamp" placeholder="Timestamp" required>
-      <button type="submit">Add Entry</button>
+
+    <form method="POST" action="/generate_barcode">
+      <input type="text" name="start_time" placeholder="Start Time (YYYY-MM-DD HH:MM:SS)" required>
+      <input type="text" name="end_time" placeholder="End Time (YYYY-MM-DD HH:MM:SS)" required>
+      <input type="text" name="shift" placeholder="Shift (A/B/C)" required>
+      <button type="submit">Generate Barcode</button>
     </form>
-    {% if entries and entries|length > 0 %}
-      <ul class="entry-list">
-        {% for entry in entries %}
-          <li>User ID: <b>{{ entry.user_id }}</b> | Shift: <b>{{ entry.shift }}</b> | Timestamp: <b>{{ entry.timestamp }}</b></li>
-        {% endfor %}
-      </ul>
-      <form method="POST" action="/generate_barcode" class="actions">
-        <button type="submit">Generate Barcode</button>
-      </form>
-    {% endif %}
+
     {% if barcode %}
       <div class="barcode-section">
         <h3>Generated Barcode</h3>
         <img src="{{ barcode }}" alt="Barcode" style="width: 100%; height: auto;">
         <p class="info">Total Actual Length: <b>{{ total }}</b></p>
+        {% if message %}<p class="info">{{ message }}</p>{% endif %}
       </div>
     {% endif %}
   </div>
+
   <script>
     function connectServer() {
       fetch('/connect')
